@@ -7,18 +7,24 @@ module.exports = router;
 router.get('/products', async (req, res) => {
     try {
         if (req.query.sort_by) {
-            const data = await Model.findbyId("6550dd1473d380721eb40ccd");
-            res.json(data)
+            const sortQuery = req.query.sort_by;
+            if (sortQuery[0] === "+") {
+                const data = await Model.find().sort({ sortQuery.slice(1): 1});
+            }
+            else if (sortQuery[0] === "-") {
+                const data = await Model.find().sort({ sortQuery.slice(1): - 1 });
+            }
+res.json(data)
         }
         else {
-            const data = await Model.find();
-            res.json(data)
-        }
+    const data = await Model.find();
+    res.json(data)
+}
 
     }
     catch (error) {
-        res.status(500).json({ message: error.message })
-    }
+    res.status(500).json({ message: error.message })
+}
 })
 
 //Get by ID Method
