@@ -17,7 +17,7 @@ router.get('/products/summary', async (req, res) => {
             },
             {
                 $addFields: {
-                    quantity: 1
+                    quantity: "$quantity"
                 }
             }
 
