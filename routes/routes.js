@@ -12,7 +12,7 @@ router.get('/products/summary', async (req, res) => {
                 $group:
                 {
                     _id: '$name',
-                    totalPrice: { $sum: { $multiply: [] } }
+                    totalPrice: { $sum: { $multiply: ["$price.amount", "$quantity"] } }
                 }
             }
 
