@@ -87,7 +87,7 @@ router.put('/products/:id', async (req, res) => {
 })
 
 //Delete product by ID
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/products/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const data = await Model.findByIdAndDelete(id)
