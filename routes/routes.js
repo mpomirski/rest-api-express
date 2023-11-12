@@ -13,14 +13,9 @@ router.get('/products/summary', async (req, res) => {
                 {
                     _id: '$name',
                     totalPrice: { $sum: { $multiply: ["$price.amount", "$quantity"] } },
+                    "quantity": { "$first": "$quantity" }
                 }
             },
-            {
-                $addFields: {
-                    quantity: "$quantity"
-                }
-            }
-
         ]);
         res.json(data)
     }
