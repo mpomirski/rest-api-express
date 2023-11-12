@@ -30,6 +30,10 @@ router.get('/products', async (req, res) => {
             }
 
         }
+        else if (req.query) {
+            const data = await Model.find(req.query);
+            res.json(data)
+        }
         else {
             const data = await Model.find();
             res.json(data)
