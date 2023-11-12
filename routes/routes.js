@@ -4,13 +4,7 @@ const router = express.Router()
 
 module.exports = router;
 
-//Post Method
-router.post('/post', (req, res) => {
-    res.send('Post API')
-})
-
-//Get all Method
-router.get('/getAll', async (req, res) => {
+router.get('/products', async (req, res) => {
     try {
         const data = await Model.find();
         res.json(data)
@@ -21,8 +15,14 @@ router.get('/getAll', async (req, res) => {
 })
 
 //Get by ID Method
-router.get('/getOne/:id', (req, res) => {
-    res.send('Get by ID API')
+router.get('/products/:id', async (req, res) => {
+    try {
+        const data = await Model.find({ "id": res.params.id });
+        res.json(data)
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
+    }
 })
 
 //Update by ID Method
