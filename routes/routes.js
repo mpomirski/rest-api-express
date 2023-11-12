@@ -17,24 +17,21 @@ router.get('/products/:id', async (req, res) => {
 
 router.get('/products', async (req, res) => {
     try {
-        if (req.query.sort_by && typeof req.query.sort_by === 'string') {
+        if (req.query.sort_by) {
             const sortQuery = req.query.sort_by.split('.');
             const fieldName = sortQuery[0]
             if (sortQuery[1] === "asc") {
-                // const data = await Model.find().sort({ fieldName: 1 });
-                const data = req.query.sort_by
+                const data = await Model.find().sort({ name: 1 });
                 res.json(data)
             }
             else if (sortQuery[1] === "desc") {
-                // const data = await Model.find().sort({ fieldName: - 1 });
-                const data = req.query.sort_by
+                const data = await Model.find().sort({ fieldName: - 1 });
                 res.json(data)
             }
 
         }
         else {
-            // const data = await Model.find();
-            const data = req.query.sort_by
+            const data = await Model.find();
             res.json(data)
         }
 
