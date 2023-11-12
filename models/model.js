@@ -4,7 +4,8 @@ const dataSchema = new mongoose.Schema({
     "name": {
         required: true,
         unique: true,
-        type: String
+        type: String,
+        dropDups: true
     },
     "price": {
         required: true,
