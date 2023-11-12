@@ -16,7 +16,11 @@ router.get('/products/summary', async (req, res) => {
                     count: { $sum: 1 }
                 }
             },
-            { $sort: { count: -1 } }
+            {
+                $addFields: {
+                    quantity: "$quantity"
+                }
+            }
 
         ]);
         res.json(data)
