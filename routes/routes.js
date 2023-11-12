@@ -49,7 +49,7 @@ router.get('/products', async (req, res) => {
     }
 })
 
-//Update by ID Method
+//Add a new product (with unique name)
 router.post('/products', async (req, res) => {
     const data = new Model({
         name: req.body.name,
@@ -68,7 +68,32 @@ router.post('/products', async (req, res) => {
     }
 })
 
-//Delete by ID Method
-router.delete('/delete/:id', (req, res) => {
-    res.send('Delete by ID API')
+//Edit product by id
+router.put('/products/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedData = req.body;
+        const options = { new: true };
+
+        const result = await Model.findByIdAndUpdate(
+            id, updatedData, options
+        )
+
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
+//Delete product by ID
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await Model.findByIdAndDelete(id)
+        res.send(`${data.name} has been deleted..`)
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message })
+    }
 })
