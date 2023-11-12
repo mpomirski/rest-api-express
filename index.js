@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-const mongoString = "'mongodb://127.0.0.1:27017/bazy"
+const mongoString = "mongodb://127.0.0.1:27017/bazy"
 mongoose.connect(mongoString);
 const database = mongoose.connection;
 
