@@ -18,15 +18,14 @@ router.get('/products/:id', async (req, res) => {
 router.get('/products', async (req, res) => {
     try {
         if (req.query.sort_by && typeof req.query.sort_by === 'string') {
-            const sortQuery = req.query.sort_by;
-            const fieldName = sortQuery.slice(1);
-            if (sortQuery[0] === "+") {
+            const sortQuery = req.query.sort_by.split('.');
+            const fieldName = sortQuery[0]
+            if (sortQuery[1] === "asc") {
                 const data = await Model.find().sort({ fieldName: 1 });
             }
-            else if (sortQuery[0] === "-") {
+            else if (sortQuery[1] === "desc") {
                 const data = await Model.find().sort({ fieldName: - 1 });
             }
-            data = sortQuery;
             res.json(data)
         }
         else {
