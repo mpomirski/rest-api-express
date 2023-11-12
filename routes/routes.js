@@ -15,6 +15,18 @@ router.get('/products/:id', async (req, res) => {
     }
 })
 
+router.get('/products/summary', async (req, res) => {
+    try {
+        const data = await Model.aggregate([
+            { $project: { _id: 0, name: 1, quantity: 1 } }
+        ]);
+        res.json(data)
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
 //Get all products, avaliable queries: 
 // - order_by = <field_name>.<asc|desc>
 // - filter as key-value mongodb pair i.e
@@ -49,6 +61,8 @@ router.get('/products', async (req, res) => {
     }
 })
 
+
+
 //Add a new product (with unique name)
 router.post('/products', async (req, res) => {
     const data = new Model({
@@ -67,6 +81,8 @@ router.post('/products', async (req, res) => {
         res.status(400).json({ message: error.message })
     }
 })
+
+
 
 //Edit product by id
 router.put('/products/:id', async (req, res) => {
