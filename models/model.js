@@ -9,7 +9,8 @@ const dataSchema = new mongoose.Schema({
     },
     "price": {
         required: true,
-        type: String
+        amount: Number,
+        currency: String
     },
     "description": {
         required: true,

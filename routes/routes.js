@@ -8,7 +8,14 @@ module.exports = router;
 router.get('/products/summary', async (req, res) => {
     try {
         const data = await Model.aggregate([
-            { $project: { _id: 0, name: 1, quantity: 1 } }
+            {
+                $group:
+                {
+                    _id: '$name',
+                    totalPrice: { $sum: { $multiply: [] } }
+                }
+            }
+
         ]);
         res.json(data)
     }
