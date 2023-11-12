@@ -4,6 +4,17 @@ const router = express.Router()
 
 module.exports = router;
 
+//Get by ID Method
+router.get('/products/:id', async (req, res) => {
+    try {
+        const data = await Model.findById(req.params.id);
+        res.json(data)
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
 router.get('/products', async (req, res) => {
     try {
         if (req.query.sort_by && typeof req.query.sort_by === 'string') {
@@ -15,6 +26,7 @@ router.get('/products', async (req, res) => {
             else if (sortQuery[0] === "-") {
                 const data = await Model.find().sort({ fieldName: - 1 });
             }
+            data = sortQuery;
             res.json(data)
         }
         else {
@@ -22,17 +34,6 @@ router.get('/products', async (req, res) => {
             res.json(data)
         }
 
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-})
-
-//Get by ID Method
-router.get('/products/:id', async (req, res) => {
-    try {
-        const data = await Model.findById(req.params.id);
-        res.json(data)
     }
     catch (error) {
         res.status(500).json({ message: error.message })
