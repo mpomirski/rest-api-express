@@ -4,16 +4,6 @@ const router = express.Router()
 
 module.exports = router;
 
-//Get product by ID
-router.get('/products/:id', async (req, res) => {
-    try {
-        const data = await Model.findById(req.params.id);
-        res.json(data)
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-})
 
 router.get('/products/summary', async (req, res) => {
     try {
@@ -26,6 +16,18 @@ router.get('/products/summary', async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 })
+
+//Get product by ID
+router.get('/products/:id', async (req, res) => {
+    try {
+        const data = await Model.findById(req.params.id);
+        res.json(data)
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
 
 //Get all products, avaliable queries: 
 // - order_by = <field_name>.<asc|desc>
