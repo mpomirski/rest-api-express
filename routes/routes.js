@@ -7,7 +7,7 @@ module.exports = router;
 router.get('/products', async (req, res) => {
     try {
         if (req.query.sort_by) {
-            const data = await Model.find({ _id: "6550dd1473d380721eb40ccd" });
+            const data = await Model.findbyId("6550dd1473d380721eb40ccd");
         }
         else {
             const data = await Model.find();
