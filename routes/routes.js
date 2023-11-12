@@ -17,7 +17,7 @@ router.get('/products', async (req, res) => {
 //Get by ID Method
 router.get('/products/:id', async (req, res) => {
     try {
-        const data = await Model.find({ id: 1 }).exec();
+        const data = await Model.findById(req.params.id);
         res.json(data)
     }
     catch (error) {
