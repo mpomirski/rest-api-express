@@ -6,7 +6,12 @@ module.exports = router;
 
 router.get('/products', async (req, res) => {
     try {
-        const data = await Model.find();
+        if (req.query.sort_by) {
+            const data = await Model.find({ _id: "6550dd1473d380721eb40ccd" });
+        }
+        else {
+            const data = await Model.find();
+        }
         res.json(data)
     }
     catch (error) {
