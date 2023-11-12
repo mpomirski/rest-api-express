@@ -8,11 +8,13 @@ router.get('/products', async (req, res) => {
     try {
         if (req.query.sort_by) {
             const data = await Model.findbyId("6550dd1473d380721eb40ccd");
+            res.json(data)
         }
         else {
             const data = await Model.find();
+            res.json(data)
         }
-        res.json(data)
+
     }
     catch (error) {
         res.status(500).json({ message: error.message })
