@@ -8,9 +8,14 @@ const dataSchema = new mongoose.Schema({
         dropDups: true
     },
     "price": {
-        required: true,
-        amount: Number,
-        currency: String
+        amount: {
+            type: Number,
+            required: true
+        },
+        currency: {
+            type: String,
+            required: true
+        }
     },
     "description": {
         required: true,
