@@ -4,7 +4,7 @@ const router = express.Router()
 
 module.exports = router;
 
-//Get by ID Method
+//Get product by ID
 router.get('/products/:id', async (req, res) => {
     try {
         const data = await Model.findById(req.params.id);
@@ -15,6 +15,10 @@ router.get('/products/:id', async (req, res) => {
     }
 })
 
+//Get all products, avaliable queries: 
+// - order_by = <field_name>.<asc|desc>
+// - filter as key-value mongodb pair i.e
+//      /products?quantity=100
 router.get('/products', async (req, res) => {
     try {
         if (req.query.sort_by) {
@@ -46,8 +50,22 @@ router.get('/products', async (req, res) => {
 })
 
 //Update by ID Method
-router.patch('/update/:id', (req, res) => {
-    res.send('Update by ID API')
+router.post('/products', async (req, res) => {
+    const data = new Model({
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        quantity: req.body.quantity,
+        unit: req.body.unit,
+    })
+
+    try {
+        const dataToSave = await data.save();
+        res.status(200).json(dataToSave)
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message })
+    }
 })
 
 //Delete by ID Method
