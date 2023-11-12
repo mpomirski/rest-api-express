@@ -22,16 +22,19 @@ router.get('/products', async (req, res) => {
             const fieldName = sortQuery[0]
             if (sortQuery[1] === "asc") {
                 const data = await Model.find().sort({ fieldName: 1 });
+                data = req.query.sort_by
                 res.json(data)
             }
             else if (sortQuery[1] === "desc") {
                 const data = await Model.find().sort({ fieldName: - 1 });
+                data = req.query.sort_by
                 res.json(data)
             }
 
         }
         else {
             const data = await Model.find();
+            data = req.query.sort_by
             res.json(data)
         }
 
