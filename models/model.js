@@ -25,6 +25,9 @@ const dataSchema = new mongoose.Schema({
         required: true,
         type: String
     },
-})
+},
+    {
+        collection: 'products'
+    });
 
 module.exports = mongoose.model('Data', dataSchema);
