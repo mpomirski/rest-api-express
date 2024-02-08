@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const routes = require('./routes/routes');
 const app = express();
 
-const mongoString = "mongodb://127.0.0.1:27017/bazy"
-mongoose.connect(mongoString);
+
+const mongoString = process.env.DATABASE_URI;
+mongoose.connect(`mongodb://${mongoString}`);
 const database = mongoose.connection;
 
 database.on('error', (error) => {
@@ -18,7 +19,7 @@ database.once('connected', () => {
 
 
 app.use(express.json());
-app.use('/app', routes);
+app.use('/', routes);
 
 app.listen(3000, () => {
     console.log(`Server Started at ${3000}`);
