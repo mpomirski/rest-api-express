@@ -1,6 +1,6 @@
 # rest-api-express
 REST API allowing CRUD functionalities, using mongoDB  
-CHANGED ENTRYPOINT: https://mpomirski.pl/app/1/app/products  
+CHANGED ENTRYPOINT: https://mpomirski.pl/app/1/products  
 Database schema:
 
     "name": {
